@@ -1,43 +1,34 @@
-const toDoList = [
-    {
-      id: 1,
-      time:"07h00",
-      description:"Acordar",
-    },
-  ];
-  
-  const findByIdToDoService = (parametroId) => {
-    return toDoList.find((toDo) => toDo.id === parametroId);
-  };
-  
-  const findAllToDoService = () => {
-    return toDoList;
-  };
-  
-  const createToDoService = (newtoDo) => {
-    const newId = toDoList.length +1;
-    newtoDo.id = newId;
-    toDoList.push(newtoDo)
-    return newtoDo;
-  };
-  
-  const updateToDoService = (id, toDoEdit) => {
-    toDoEdit ['id'] = id;
-    const toDoIndex = toDoList.findIndex((toDo)=> toDo.id == id);
-    toDoList[toDoIndex] = toDoEdit;
-    return toDoEdit;
-  };
-  
-  const deleteToDoService = (id) => {
-    const toDoIndex = toDoList.findIndex((toDo)=> toDo.id == id);
-    return toDoList.splice(toDoIndex, 1);
-  };
-  
-  module.exports = {
-    findAllToDoService,
-    findByIdToDoService,
-    createToDoService,
-    updateToDoService,
-    deleteToDoService,
-  };
-  
+
+const Todolists = require('../models/Todo');
+
+const findAllToDoService = async () => {
+  const toDoList = await Todolists.find();
+  return toDoList;
+};
+
+const findByIdToDoService = async (idParam) => {
+  const toDoList = await Todolists.findById(idParam)
+  return toDoList;
+};
+
+const createToDoService = async (newtoDo) => {
+  const newToDo = await Todolists.create(newtoDo)
+  return newToDo;
+};
+
+const updateToDoService = async (id, toDoEdit) => {
+  const toDoUpdated = await Todolists.findByIdAndUpdate(id, toDoEdit)
+  return toDoUpdated;
+};
+
+const deleteToDoService = async (id) => {
+  return await Todolists.findByIdAndDelete(id);
+};
+
+module.exports = {
+  findAllToDoService,
+  findByIdToDoService,
+  createToDoService,
+  updateToDoService,
+  deleteToDoService,
+};
