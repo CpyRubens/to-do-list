@@ -1,0 +1,82 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API To Do List",
+        "description": "API para CRUD de To Do List",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3003",
+            "description": "Url de teste"
+        }
+    ],
+    "paths": {
+        "/to-do-list/": {
+            "get": {
+                "summary": "Lista completa",
+                "description": "Rota responsável por listar todas os itens",
+                "tags": [
+                    "To Do List"
+                ],
+                "responses": {
+                    "200": {
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "$ref":"#/components/schemas/Todo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Criar",
+                "description": "Rota responsável por criar",
+                "tags": [
+                    "To Do List"
+                ],
+                "responses": {
+                    "200": {
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "items":{
+                                        "$ref":"#/components/schemas/Todo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/to-do-list/{id}": {
+            "get": {},
+            "put": {},
+            "delete": {}
+        }
+    },
+    "components": {
+        "schemas": {
+            "Todo": {
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
