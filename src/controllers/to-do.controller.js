@@ -30,9 +30,9 @@ const createToDoController = async (req, res) => {
   const ToDo = req.body;
   if (
     !ToDo ||
-    !ToDo.time ||
-    !ToDo.description
-  ) {
+    !ToDo.titulo||
+    !ToDo.horario ||
+    !ToDo.descricao  ) {
     res.status(400).send({ mensagem: "Você não preencheu todos os dados para adicionar uma nova ToDo a sua lista!" });
 
   }
@@ -56,7 +56,7 @@ const updateToDoController = async (req, res) => {
   }
 
 
-  if (!ToDoEdit || !ToDoEdit.time || !ToDoEdit.description) {
+  if (!ToDoEdit ||!ToDoEdit.titulo || !ToDoEdit.horario || !ToDoEdit.descricao) {
     return res.status(400).send({ message: "Você não preencheu todos os dados para editar a ToDo!" });
   }
 
